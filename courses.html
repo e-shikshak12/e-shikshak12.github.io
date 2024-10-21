@@ -1,0 +1,157 @@
+
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Course Page</title> 
+  <link rel="stylesheet" href="styles.css"> 
+ <style type="text/css" id="dcoder_stylesheet">
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://c1.wallpaperflare.com/path/552/758/364/computer-laptop-macbook-coding-3efef3be4768ac0622f6db2e80b31e57.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Transparent NavBar Styling */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  nav ul li {
+    margin-left: 20px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  nav ul li a:hover {
+    color: #66ccff; /* Color on hover */
+  }
+
+  .logo-container {
+    text-align: center;
+    margin: 100px 0 20px 0; /* Adjust margin to account for navbar */
+  }
+
+  .logo {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Cursive', sans-serif;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .course-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .course {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin: 15px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .course h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .course p {
+    font-size: 14px;
+  }
+
+  .see-lessons {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: rgba(0, 102, 204, 0.8);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+
+  .see-lessons:hover {
+    background-color: rgba(0, 102, 204, 1);
+  }
+ </style>
+ </head> 
+ <body> 
+
+  <!-- Transparent Navbar -->
+  <nav>
+    <div class="logo">E-Shikshak</div>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="logo-container"> 
+   <h1 class="logo">E-Shikshak</h1> 
+  </div> 
+
+  <div class="course-container"> 
+   <div class="course"> 
+    <h2>HTML</h2> 
+    <p>Learn the basics of HTML and build your own web pages.</p> 
+    <a href="html_ls.html" class="see-lessons">See Lessons</a> 
+   </div> 
+   <div class="course"> 
+    <h2>CSS</h2> 
+    <p>Style your web pages and make them beautiful using CSS.</p> 
+    <a href="css-lessons.html" class="see-lessons">See Lessons</a> 
+   </div> 
+   <div class="course"> 
+    <h2>JavaScript</h2> 
+    <p>Make your web pages interactive with JavaScript.</p> 
+    <a href="javascript-lessons.html" class="see-lessons">See Lessons</a> 
+   </div> 
+   <div class="course"> 
+    <h2>Python</h2> 
+    <p>Learn Python for web development, data science, and more.</p> 
+    <a href="python-lessons.html" class="see-lessons">See Lessons</a> 
+   </div> 
+   <div class="course"> 
+    <h2>Java</h2> 
+    <p>Master Java programming and build powerful applications.</p> 
+    <a href="java-lessons.html" class="see-lessons">See Lessons</a> 
+   </div> 
+  </div> 
+ 
+</body>
+</html>
