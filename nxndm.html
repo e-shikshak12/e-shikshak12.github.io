@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Difficulty Levels</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        h2 {
+            font-size: 2rem;
+            margin: 20px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            font-size: 1.2rem;
+            color: #f0f0f0;
+            margin-bottom: 30px;
+        }
+        .start-quiz {
+            display: inline-block;
+            background: #ff7e5f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .start-quiz:hover {
+            background: #feb47b;
+        }
+        .difficulty-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .difficulty-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .difficulty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .difficulty-title {
+            font-size: 2rem;
+            margin: 10px 0;
+            color: #ff7e5f;
+        }
+        .difficulty-description {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #f0f0f0;
+        }
+        .cta {
+            display: inline-block;
+            background: #ff7e5f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .cta:hover {
+            background: #feb47b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Quiz</h1>
+    <h2>Test Your Knowledge</h2>
+    <p>Challenge yourself with a variety of questions across different topics. Select your difficulty level and see how well you can perform!</p>
+    <a href="#" class="start-quiz">Start Quiz</a>
+
+    <h1>Choose Your Challenge</h1>
+    <div class="difficulty-container">
+        <!-- Easy Card -->
+        <div class="difficulty-card">
+            <div class="difficulty-title">Easy</div>
+            <div class="difficulty-description">
+                Start your journey with simple tasks to build confidence and skills.
+            </div>
+            <a href="#" class="cta">Start Easy</a>
+        </div>
+        
+        <!-- Medium Card -->
+        <div class="difficulty-card">
+            <div class="difficulty-title">Medium</div>
+            <div class="difficulty-description">
+                Challenge yourself with intermediate tasks to enhance your understanding.
+            </div>
+            <a href="#" class="cta">Start Medium</a>
+        </div>
+
+        <!-- Hard Card -->
+        <div class="difficulty-card">
+            <div class="difficulty-title">Hard</div>
+            <div class="difficulty-description">
+                Test your limits with advanced tasks designed for the experienced learner.
+            </div>
+            <a href="#" class="cta">Start Hard</a>
+        </div>
+    </div>
+
+</body></html>
