@@ -1,0 +1,176 @@
+
+<!doctype html>
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>E-Shikshak - Sign In/Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script> 
+  <style>
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom animation for text */
+    .fade-in {
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Flip card styles */
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      max-height: 600px;
+      perspective: 1000px;
+      margin: 20px auto;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .flip-card-front {
+      background-color: white;
+    }
+
+    .flip-card-back {
+      background-color: white;
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-inner.flip {
+      transform: rotateY(180deg);
+    }
+
+    /* Button styles */
+    button {
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #4F46E5;
+      color: white;
+    }
+  </style>
+</head> 
+<body class="bg-gradient-to-b from-purple-500 via-indigo-600 to-purple-500 text-gray-100 flex items-center justify-center h-screen flex-col"> 
+  <header class="text-white body-font shadow-lg bg-opacity-70 backdrop-blur-sm w-full"> 
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center mb-4 md:mb-0">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBzDQnJKZ2-wdgNPz_6Kx_hff_Q_KI_s3G0w&s" alt="E-Shikshak Logo" class="w-12 h-12 p-2 rounded-full shadow-md">
+        <span class="ml-3 text-3xl font-bold tracking-wide">E-Shikshak</span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-lg justify-center space-x-6">
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">HOME</a>
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">ABOUT</a>
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">COURSES</a>
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">QUIZ</a>
+      </nav>
+    </div> 
+  </header> 
+
+  <!-- Flip Card Section -->
+  <div class="flip-card w-full max-w-lg mx-auto p-4"> 
+    <div class="flip-card-inner" id="cardInner"> 
+      <!-- Sign In Form -->
+      <div class="flip-card-front flex flex-col items-center justify-center p-4"> 
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Sign In</h1> 
+        <form class="w-full max-w-xs"> 
+          <div class="mb-4"> 
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label> 
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email"> 
+          </div> 
+          <div class="mb-4"> 
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label> 
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password"> 
+          </div> 
+          <div class="flex items-center justify-between"> 
+            <button type="button" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="signIn()">Sign In</button> 
+          </div> 
+          <div class="mt-4 text-center"> 
+            <span class="text-gray-600">Don't have an account? </span> 
+            <button type="button" class="text-indigo-500 hover:underline" onclick="flipCard()">Sign Up</button> 
+          </div> 
+        </form> 
+      </div> 
+
+      <!-- Sign Up Form -->
+      <div class="flip-card-back flex flex-col items-center justify-center p-4"> 
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Sign Up</h1> 
+        <form class="w-full max-w-xs"> 
+          <div class="mb-4"> 
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">Full Name</label> 
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="full-name" type="text" placeholder="Full Name"> 
+          </div>
+          <div class="mb-4"> 
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="new-email">Email</label> 
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="new-email" type="email" placeholder="Email"> 
+          </div> 
+          <div class="mb-4"> 
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="new-password">Password</label> 
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="new-password" type="password" placeholder="Password"> 
+          </div>
+          <div class="mb-4"> 
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="confirm-password">Confirm Password</label> 
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="confirm-password" type="password" placeholder="Confirm Password"> 
+          </div>
+          <div class="mb-4 flex items-center">
+            <input type="checkbox" id="terms" class="mr-2 leading-tight">
+            <label class="block text-gray-700 text-sm font-bold" for="terms">I agree to the Terms and Conditions</label>
+          </div>
+          <div class="flex items-center justify-between"> 
+            <button type="button" class="bg-indigo-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="signUp()">Sign Up</button> 
+          </div> 
+          <div class="mt-4 text-center"> 
+            <span class="text-gray-600">Already have an account? </span> 
+            <button type="button" class="text-indigo-500 hover:underline" onclick="flipCard()">Sign In</button> 
+          </div> 
+        </form> 
+      </div> 
+    </div> 
+  </div> 
+
+  <script>
+    function flipCard() {
+      const cardInner = document.getElementById("cardInner");
+      cardInner.classList.toggle("flip");
+    }
+
+    function signIn() {
+      alert('Sign In functionality not implemented yet.');
+    }
+
+    function signUp() {
+      alert('Sign Up functionality not implemented yet.');
+    }
+  </script>
+</body>
+</html>
