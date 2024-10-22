@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="en"> 
 <head> 
@@ -158,19 +159,80 @@
     </div> 
   </div> 
 
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-analytics.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC9zJpV9e0gA5R6oypf6NHEWblAp2RPwwA",
+    authDomain: "e-shikshak-2010.firebaseapp.com",
+    projectId: "e-shikshak-2010",
+    storageBucket: "e-shikshak-2010.appspot.com",
+    messagingSenderId: "16764942471",
+    appId: "1:16764942471:web:66fb4a151320d1c6c6e022",
+    measurementId: "G-1SPKVNX1CZ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+
+  function flipCard() {
+    const cardInner = document.getElementById("cardInner");
+    cardInner.classList.toggle("flip");
+  }
+
+  // Attach functions to the window object
+  window.signIn = function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        alert('Sign In Successful');
+        // Redirect or perform further actions
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  window.signUp = function() {
+    const fullName = document.getElementById("full-name").value;
+    const email = document.getElementById("new-email").value;
+    const password = document.getElementById("new-password").value;
+
+   createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Optional: Update user profile
+      return userCredential.user.updateProfile({
+        displayName: fullName
+      });
+    })
+    .then(() => {
+      // Redirect to home.html after successful sign-up
+      window.location.href = "home.html";
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
+</script>
+
+
   <script>
+
     function flipCard() {
       const cardInner = document.getElementById("cardInner");
       cardInner.classList.toggle("flip");
     }
 
-    function signIn() {
-      alert('Sign In functionality not implemented yet.');
-    }
-
-    function signUp() {
-      alert('Sign Up functionality not implemented yet.');
-    }
+   
   </script>
 </body>
 </html>
