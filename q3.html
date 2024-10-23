@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <style type="text/css" id="dcoder_stylesheet">
+        /* Reset margins and paddings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quiz-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #progress-container {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            width: 100%;
+            height: 12px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #progress {
+            height: 100%;
+            background: linear-gradient(90deg, #12c2e9, #c471ed, #f64f59);
+            width: 0;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .question-section {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #question-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #444;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            background-color: #e7e7e7;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .correct {
+            background-color: #4CAF50 !important;
+            color: white;
+        }
+
+        .wrong {
+            background-color: #f44336 !important;
+            color: white;
+        }
+
+        .next-btn {
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .next-btn:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+
+        .next-btn:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+
+        .score-display {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 20px;
+            }
+
+            .quiz-title {
+                font-size: 1.8rem;
+            }
+
+            .option-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .next-btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-wrapper">
+        <div class="quiz-container">
+            <h1 class="quiz-title">Test Your Coding Knowledge!</h1>
+            <div id="progress-container">
+                <div id="progress"></div>
+            </div>
+            <div class="question-section">
+                <h2 id="question-title">Question</h2>
+            </div>
+            <div id="options-container"></div>
+            <button id="next-btn" class="next-btn" disabled>Next Question</button>
+            <div class="score-display">Score: <span id="score">0</span></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+    <script type="text/javascript" id="dcoder_script">
+        const questions = [
+            { question: "What is the time complexity of accessing an element in an array?", options: ["O(1)", "O(n)", "O(log n)", "O(n^2)"], answer: "O(1)" },
+            { question: "In which data structure can you find the 'pop' operation?", options: ["Queue", "Stack", "Linked List", "Tree"], answer: "Stack" },
+            { question: "What is a closure in JavaScript?", options: ["A variable that cannot be changed", "A function that retains access to its outer scope", "A type of loop", "An error type"], answer: "A function that retains access to its outer scope" },
+            { question: "What does the 'this' keyword refer to in JavaScript?", options: ["The global object", "The object that owns the method", "The function itself", "None of the above"], answer: "The object that owns the method" },
+            { question: "Which algorithm is used for sorting an array with the best average performance?", options: ["Quick Sort", "Bubble Sort", "Merge Sort", "Insertion Sort"], answer: "Merge Sort" },
+            { question: "What is the output of 0.1 + 0.2 === 0.3 in JavaScript?", options: ["true", "false", "undefined", "NaN"], answer: "false" },
+            { question: "In which case would you use a hash table?", options: ["When you need ordered data", "When you need quick lookups", "When you need sorted data", "None of the above"], answer: "When you need quick lookups" },
+            { question: "What is the purpose of the 'async' keyword in JavaScript?", options: ["To define a function that returns a promise", "To create a closure", "To execute a function synchronously", "To pause execution"], answer: "To define a function that returns a promise" },
+            { question: "Which of the following is a feature of functional programming?", options: ["Mutability", "Side effects", "First-class functions", "Loops"], answer: "First-class functions" },
+            { question: "What is the result of the expression '5' + 5 in JavaScript?", options: ["10", "55", "NaN", "undefined"], answer: "55" },
+            { question: "Which design pattern ensures that a class has only one instance?", options: ["Factory", "Singleton", "Observer", "Decorator"], answer: "Singleton" },
+            { question: "In what scenario would you use recursion?", options: ["When an iterative solution is simpler", "When the problem can be broken down into smaller subproblems", "When you want to avoid using loops", "All of the above"], answer: "When the problem can be broken down into smaller subproblems" },
+            { question: "What is the difference between 'let' and 'var' in JavaScript?", options: ["'let' is block-scoped, while 'var' is function-scoped", "'let' can be redeclared, while 'var' cannot", "'let' is used for constants", "'var' is more performant"], answer: "'let' is block-scoped, while 'var' is function-scoped" },
+            { question: "What does SQL stand for?", options: ["Structured Query Language", "Structured Question Language", "Simple Query Language", "Simple Question Language"], answer: "Structured Query Language" },
+            { question: "What is the time complexity of binary search?", options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"], answer: "O(log n)" },
+            { question: "In CSS, which property is used to change the font of an element?", options: ["font-family", "text-font", "font-style", "font-weight"], answer: "font-family" },
+            { question: "What is a promise in JavaScript?", options: ["An object representing the eventual completion of an asynchronous operation", "A method for delaying execution", "A synchronous operation", "A data structure"], answer: "An object representing the eventual completion of an asynchronous operation" },
+            { question: "Which method can be used to remove the last element from an array in JavaScript?", options: ["pop()", "push()", "shift()", "unshift()"], answer: "pop()" },
+            { question: "What is a RESTful API?", options: ["A web service that uses HTTP requests to perform CRUD operations", "A database structure", "A frontend framework", "None of the above"], answer: "A web service that uses HTTP requests to perform CRUD operations" },
+            { question: "Which of the following is NOT a valid HTTP method?", options: ["GET", "POST", "DELETE", "SAVE"], answer: "SAVE" },
+            { question: "What is the main purpose of Git?", options: ["To edit code", "To share code", "To track changes in source code", "To compile code"], answer: "To track changes in source code" },
+            { question: "Which of the following is a way to declare a constant in JavaScript?", options: ["const myVar;", "let myVar;", "var myVar;", "None of the above"], answer: "const myVar;" },
+            { question: "What does 'npm' stand for?", options: ["Node Package Manager", "Node Programming Manager", "New Package Manager", "None of the above"], answer: "Node Package Manager" },
+            { question: "Which of the following data types is NOT primitive in JavaScript?", options: ["String", "Number", "Object", "Boolean"], answer: "Object" },
+            { question: "In which year was JavaScript created?", options: ["1995", "1996", "1994", "1998"], answer: "1995" },
+            { question: "What is the purpose of the 'finally' block in JavaScript?", options: ["To execute code regardless of an error occurring", "To execute code only if an error occurs", "To catch errors", "None of the above"], answer: "To execute code regardless of an error occurring" },
+            { question: "Which algorithm is considered the fastest for large datasets?", options: ["Quick Sort", "Bubble Sort", "Insertion Sort", "Selection Sort"], answer: "Quick Sort" },
+            { question: "What is the purpose of the 'await' keyword in JavaScript?", options: ["To pause execution until a promise is resolved", "To declare a variable", "To create a function", "To catch errors"], answer: "To pause execution until a promise is resolved" },
+            { question: "In Python, what is the difference between 'list' and 'tuple'?", options: ["Lists are immutable; tuples are mutable", "Lists are mutable; tuples are immutable", "Both are mutable", "Both are immutable"], answer: "Lists are mutable; tuples are immutable" },
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedQuestions = [];
+
+        const questionTitle = document.getElementById("question-title");
+        const optionsContainer = document.getElementById("options-container");
+        const nextBtn = document.getElementById("next-btn");
+        const progressBar = document.getElementById("progress");
+        const scoreLabel = document.getElementById("score");
+
+        // Randomly select 15 unique questions
+        function selectRandomQuestions() {
+            const shuffled = questions.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 15);
+        }
+
+        selectedQuestions = selectRandomQuestions();
+
+        function loadQuestion() {
+            const currentQuestion = selectedQuestions[currentQuestionIndex];
+            questionTitle.textContent = currentQuestion.question;
+
+            optionsContainer.innerHTML = "";
+            currentQuestion.options.forEach(option => {
+                const btn = document.createElement("button");
+                btn.classList.add("option-btn");
+                btn.textContent = option;
+                btn.addEventListener("click", () => selectAnswer(option));
+                optionsContainer.appendChild(btn);
+            });
+
+            nextBtn.disabled = true;
+        }
+
+        function selectAnswer(selectedOption) {
+            const currentQuestion = selectedQuestions[currentQuestionIndex];
+            const isCorrect = selectedOption === currentQuestion.answer;
+
+            if (isCorrect) {
+                score++;
+                scoreLabel.textContent = score;
+            }
+
+            Array.from(optionsContainer.children).forEach(btn => {
+                if (btn.textContent === currentQuestion.answer) {
+                    btn.style.backgroundColor = "#4CAF50"; // Correct answer color
+                } else {
+                    btn.style.backgroundColor = "#f44336"; // Wrong answer color
+                }
+                btn.disabled = true;
+            });
+
+            nextBtn.disabled = false;
+        }
+
+        nextBtn.addEventListener("click", () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < selectedQuestions.length) {
+                updateProgressBar();
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / selectedQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function showResults() {
+            questionTitle.textContent = `Quiz Complete! Your score is ${score} out of ${selectedQuestions.length}`;
+            optionsContainer.innerHTML = "";
+            nextBtn.style.display = "none";
+        }
+
+        window.onload = () => {
+            loadQuestion();
+            updateProgressBar();
+        };
+    </script>
+</body>
+</html>
