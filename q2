@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Coding Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset margins and paddings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quiz-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #progress-container {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            width: 100%;
+            height: 12px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #progress {
+            height: 100%;
+            background: linear-gradient(90deg, #12c2e9, #c471ed, #f64f59);
+            width: 0;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .question-section {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #question-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #444;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            background-color: #e7e7e7;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .correct {
+            background-color: #4CAF50 !important;
+            color: white;
+        }
+
+        .wrong {
+            background-color: #f44336 !important;
+            color: white;
+        }
+
+        .next-btn {
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .next-btn:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+
+        .next-btn:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+
+        .score-display {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 20px;
+            }
+
+            .quiz-title {
+                font-size: 1.8rem;
+            }
+
+            .option-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .next-btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-wrapper">
+        <div class="quiz-container">
+            <h1 class="quiz-title">Test Your Easy Coding Knowledge!</h1>
+            <div id="progress-container">
+                <div id="progress"></div>
+            </div>
+            <div class="question-section">
+                <h2 id="question-title">Question</h2>
+            </div>
+            <div id="options-container"></div>
+            <button id="next-btn" class="next-btn" disabled>Next Question</button>
+            <div class="score-display">Score: <span id="score">0</span></div>
+        </div>
+    </div>
+    <script>
+        const questions = [
+            { question: "What does HTML stand for?", options: ["Hyper Text Markup Language", "High Text Markup Language", "Hyperlink and Text Markup Language", "None of the above"], answer: "Hyper Text Markup Language" },
+            { question: "What does CSS stand for?", options: ["Cascading Style Sheets", "Creative Style System", "Computer Style Sheets", "Cascading System Styles"], answer: "Cascading Style Sheets" },
+            { question: "Which HTML element is used to define the title of a document?", options: ["<title>", "<head>", "<meta>", "<link>"], answer: "<title>" },
+            { question: "Which is the correct CSS syntax?", options: ["body {color: black;}", "{body;color:black;}", "body:color=black;", "body {color black;}"], answer: "body {color: black;}" },
+            { question: "Which of these is a JavaScript data type?", options: ["String", "Boolean", "Undefined", "All of the above"], answer: "All of the above" },
+            { question: "Which symbol is used for comments in JavaScript?", options: ["//", "#", "<!--", "/*"], answer: "//" },
+            { question: "Which HTML tag is used to define an internal style sheet?", options: ["<css>", "<style>", "<script>", "<link>"], answer: "<style>" },
+            { question: "Which attribute is used to define inline styles?", options: ["style", "font", "class", "styles"], answer: "style" },
+            { question: "Which of the following is a valid JavaScript variable name?", options: ["2names", "name@user", "name_user", "name user"], answer: "name_user" },
+            { question: "How do you create a function in JavaScript?", options: ["function myFunction()", "function:myFunction()", "function = myFunction()", "create myFunction()"], answer: "function myFunction()" },
+            { question: "Which tag is used to create a hyperlink in HTML?", options: ["<a>", "<link>", "<href>", "<url>"], answer: "<a>" },
+            { question: "Which of the following is not a programming language?", options: ["Python", "Java", "HTML", "C++"], answer: "HTML" },
+            { question: "How do you declare a JavaScript array?", options: ["var colors = []", "var colors = {}", "var colors = ()", "var colors = ||"], answer: "var colors = []" },
+            { question: "What does the 'src' attribute do in an <img> tag?", options: ["Sets the source of the image", "Sets the title of the image", "Sets the alternate text", "Sets the height of the image"], answer: "Sets the source of the image" },
+            { question: "Which operator is used to assign a value in JavaScript?", options: ["=", "==", "===", ":"], answer: "=" },
+            { question: "What is the correct syntax to create a new object in JavaScript?", options: ["var obj = new Object()", "var obj = Object()", "var obj = new[]", "var obj = {}"], answer: "var obj = new Object()" },
+            { question: "Which of these HTML elements is a block element?", options: ["<span>", "<div>", "<a>", "<img>"], answer: "<div>" },
+                { question: "What does the 'alt' attribute do in an <img> tag?", options: ["Defines alternative text for an image", "Defines the height of an image", "Defines the width of an image", "Defines the style of an image"], answer: "Defines alternative text for an image" },
+            { question: "How can you add a comment in a CSS file?", options: ["// This is a comment", "/* This is a comment */", "<!-- This is a comment -->", "## This is a comment"], answer: "/* This is a comment */" },
+            { question: "Which HTML element is used to define a list?", options: ["<list>", "<ol>", "<ul>", "<li>"], answer: "<ul>" },
+            { question: "What is the main purpose of JavaScript?", options: ["To style web pages", "To structure web pages", "To add interactivity to web pages", "To create databases"], answer: "To add interactivity to web pages" },
+            { question: "Which of the following is used to create a comment in HTML?", options: ["// This is a comment", "/* This is a comment */", "<!-- This is a comment -->", "# This is a comment"], answer: "<!-- This is a comment -->" },
+            { question: "What does the 'href' attribute in a link tag do?", options: ["Defines the link", "Defines the target of the link", "Defines the style of the link", "Defines the title of the link"], answer: "Defines the link" },
+            { question: "Which of these is a way to declare a variable in JavaScript?", options: ["let myVar;", "var myVar;", "const myVar;", "All of the above"], answer: "All of the above" },
+            { question: "Which of the following is a front-end technology?", options: ["Node.js", "PHP", "JavaScript", "Python"], answer: "JavaScript" },
+            { question: "How do you make a number rounded in JavaScript?", options: ["Math.round()", "Math.ceil()", "Math.floor()", "All of the above"], answer: "Math.round()" },
+            { question: "What is the correct syntax for including a JavaScript file in HTML?", options: ["<script src='file.js'>", "<javascript src='file.js'>", "<js src='file.js'>", "<script href='file.js'>"], answer: "<script src='file.js'>" },
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedQuestions = [];
+
+        const questionTitle = document.getElementById("question-title");
+        const optionsContainer = document.getElementById("options-container");
+        const nextBtn = document.getElementById("next-btn");
+        const progressBar = document.getElementById("progress");
+        const scoreLabel = document.getElementById("score");
+
+        // Randomly select 15 unique questions
+        function selectRandomQuestions() {
+            const shuffled = questions.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 15);
+        }
+
+        selectedQuestions = selectRandomQuestions();
+
+        function loadQuestion() {
+            const currentQuestion = selectedQuestions[currentQuestionIndex];
+            questionTitle.textContent = currentQuestion.question;
+
+            optionsContainer.innerHTML = "";
+            currentQuestion.options.forEach(option => {
+                const btn = document.createElement("button");
+                btn.classList.add("option-btn");
+                btn.textContent = option;
+                btn.addEventListener("click", () => selectAnswer(option));
+                optionsContainer.appendChild(btn);
+            });
+
+            nextBtn.disabled = true;
+        }
+
+        function selectAnswer(selectedOption) {
+            const currentQuestion = selectedQuestions[currentQuestionIndex];
+            const isCorrect = selectedOption === currentQuestion.answer;
+
+            if (isCorrect) {
+                score++;
+                scoreLabel.textContent = score;
+            }
+
+            Array.from(optionsContainer.children).forEach(btn => {
+                if (btn.textContent === currentQuestion.answer) {
+                    btn.style.backgroundColor = "#4CAF50"; // Correct answer color
+                } else {
+                    btn.style.backgroundColor = "#f44336"; // Wrong answer color
+                }
+                btn.disabled = true;
+            });
+
+            nextBtn.disabled = false;
+        }
+
+        nextBtn.addEventListener("click", () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < selectedQuestions.length) {
+                updateProgressBar();
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / selectedQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function showResults() {
+            questionTitle.textContent = `Quiz Complete! Your score is ${score} out of ${selectedQuestions.length}`;
+            optionsContainer.innerHTML = "";
+            nextBtn.style.display = "none";
+        }
+
+        window.onload = () => {
+            loadQuestion();
+            updateProgressBar();
+        };
+    </script>
+</body>
+</html>
+ 
