@@ -17,123 +17,105 @@
             height: 100vh;
             color: #333;
         }
-
-        .compiler-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 90%;
-            max-width: 800px;
-            transition: all 0.3s ease;
-        }
-
-        h1 {
+        h2 {
+            font-size: 3em;
+            margin-top: 120px;
+            color: #ffffff;
+            text-shadow: 2px 4px 5px #1b283a;
+            position: relative  ;
             text-align: center;
-            color: #007bff;
-            margin-bottom: 20px;
         }
-
-        .language-select {
-            margin: 20px 0;
-        }
-
-        select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-            border: 1px solid #007bff;
-            font-size: 16px;
-            background: #f7f7f7;
-            cursor: pointer;
-            transition: border 0.3s;
-        }
-
-        select:hover {
-            border: 1px solid #0056b3;
-        }
-
-        textarea {
-            width: 100%;
-            height: 200px;
-            border-radius: 5px;
-            border: 1px solid #007bff;
-            padding: 10px;
-            font-size: 16px;
-            resize: none;
-            font-family: monospace;
-            background-color: #f7f7f7;
-            transition: border 0.3s;
-        }
-
-        textarea:focus {
-            border: 1px solid #0056b3;
-            outline: none;
-        }
-
-        .execute-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-            border: none;
-            background-color: #007bff;
+        #editor {
+        width: 100%;
+        height: 400px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    #output {
+        width: 100%;
+        height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: white;
+        margin-bottom: 10px;
+    }
+    button {
+        background: linear-gradient(to right, rgb(40, 69, 196), rgb(119, 119, 119));
             color: white;
-            font-size: 18px;
+            border: none;
+            padding: 10px 20px;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    .controls {
+        text-align: center;
+        margin: 20px 0;
+    }
 
-        .execute-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .output {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #007bff;
-            border-radius: 5px;
-            background-color: #f7f7f7;
-            font-family: monospace;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
     </style>
 </head>
 <body>
-    <div class="compiler-container">
-        <h1>Online Code Compiler</h1>
-        <div class="language-select">
-            <label for="language">Select Language:</label>
-            <select id="language">
-                <option value="python">Python</option>
-                <option value="javascript">JavaScript</option>
-                <option value="java">Java</option>
-                <option value="c">C</option>
-                <option value="cpp">C++</option>
-                <option value="ruby">Ruby</option>
-                <option value="php">PHP</option>
-                <option value="go">Go</option>
-                <option value="rust">Rust</option>
-                <option value="swift">Swift</option>
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
-                <option value="typescript">TypeScript</option>
-            </select>
-        </div>
-        <textarea id="code" placeholder="Write your code here..."></textarea>
-        <button class="execute-btn" onclick="executeCode()">Run Code</button>
-        <div class="output" id="output"></div>
+    <h2>Web Code Editor</h2>
+    <div class="controls">
+        <!-- Run Button -->
+        <button onclick="runCode()">Run Code</button>
     </div>
-
+    
+    <!-- Ace Code Editor -->
+    <div id="editor">
+        &lt;!-- Write your HTML, CSS, and JavaScript here --&gt;
+        &lt;h1&gt;Hello, World!&lt;/h1&gt;
+        &lt;style&gt;
+            body {
+                background-color: #f0f0f0;
+                text-align: center;
+            }
+        &lt;/style&gt;
+        &lt;script&gt;
+            console.log('JavaScript is working!');
+        &lt;/script&gt;
+    </div>
+    
+    <!-- Output area -->
+    <iframe id="output"></iframe>
+    
+    <!-- Ace Editor and CDN for language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js"></script>
+    
     <script>
-        function executeCode() {
-            const language = document.getElementById('language').value;
-            const code = document.getElementById('code').value;
-            const outputDiv = document.getElementById('output');
-
-            // Placeholder for execution logic (you can integrate an API here)
-            // For now, just displaying the code and selected language
-            outputDiv.textContent = `Executing ${language} code:\n${code}`;
+        // Initialize Ace Editor
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai"); // Set theme
+        editor.session.setMode("ace/mode/html"); // Default mode (HTML)
+    
+        // Enable autocompletion and snippets
+        ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+    
+        // Function to run code
+        function runCode() {
+            var code = editor.getValue(); // Get code from editor
+    
+            console.log("Running code:", code); // Debug log
+    
+            var iframe = document.getElementById('output');
+            var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+    
+            iframeDocument.open();
+            iframeDocument.write(code); // Inject code into iframe
+            iframeDocument.close();
         }
     </script>
 </body>
