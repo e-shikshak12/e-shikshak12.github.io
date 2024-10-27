@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Introduction with Advanced AI Assistant</title>
+    <title>HTML Introduction with AI Assistant</title>
     <link rel="stylesheet" href="styles.css">
     <style type="text/css">
         /* General Styles */
@@ -38,9 +38,11 @@
         .video-section {
             flex: 3;
             margin-right: 20px;
+            height: 400px; /* Set height to match AI assistant container */
         }
         iframe {
             width: 100%;
+            height: 100%; /* Match height of container */
             border-radius: 10px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
@@ -50,9 +52,10 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            height: 400px; /* Fixed height */
         }
         #chat-box {
-            height: 300px;
+            height: 260px; /* Adjusted to fit within the assistant container */
             overflow-y: auto;
             background-color: #f1f1f1;
             padding: 15px;
@@ -89,6 +92,10 @@
             }
             .video-section, .ai-assistant {
                 margin-bottom: 20px;
+                height: auto; /* Remove fixed height for mobile */
+            }
+            iframe {
+                height: auto; /* Remove fixed height for mobile */
             }
         }
     </style>
@@ -123,34 +130,39 @@
     </footer>
 
     <script>
-        async function getAnswer() {
-            const userInput = document.getElementById('user-input').value;
+        const responses = {
+            "hi": "Hello! How can I assist you with HTML or general knowledge?",
+            "hello": "Hi there! Ready to dive into HTML or need some general knowledge?",
+            "what is html": "HTML stands for HyperText Markup Language. It is used to create the structure of web pages.",
+            "html basics": "The basics of HTML include understanding tags, elements, attributes, and the general structure of a web document.",
+            "html tag": "An HTML tag is a keyword enclosed in angle brackets, like <html>, <head>, <body>, and is used to define parts of an HTML document.",
+            "html element": "An HTML element is a complete set of tags and the content within them, such as <p>Some text</p>.",
+            "html attribute": "Attributes provide additional information about an HTML element, such as 'id', 'class', and 'style'.",
+            "html5": "HTML5 is the fifth version of HTML and includes new features like semantic tags, multimedia support, and local storage.",
+            "html5 audio": "The <audio> tag is used to embed sound content. Attributes include 'controls', 'src', and 'autoplay'.",
+            "html5 video": "The <video> tag is used to embed video files. It supports attributes like 'controls', 'src', and 'poster'.",
+            "html link": "The <a> tag creates a hyperlink, which is used to link from one page to another.",
+            "html img": "The <img> tag is used to embed images in a web page. Important attributes are 'src' (source) and 'alt' (alternative text).",
+            "css": "CSS stands for Cascading Style Sheets and is used to style HTML elements.",
+            "javascript": "JavaScript is a programming language commonly used to add interactivity to web pages.",
+            "largest ocean": "The Pacific Ocean is the largest and deepest ocean on Earth.",
+            "world population": "The world population is over 7.8 billion people."
+        };
+
+        function getAnswer() {
+            const userInput = document.getElementById('user-input').value.toLowerCase().trim();
             const chatBox = document.getElementById('chat-box');
 
-            // Add user input to the chat box
+            // Display user's message
             chatBox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
 
-            // Fetch AI response from OpenAI API
-            const response = await fetch('https://api.openai.com/v1/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer sk-aBmPVpcdb6KZBRct2eY2QKXW9Zt1sTYwHwB6EyhXsmT3BlbkFJCzx6Sbwf0Qz8sWoNeQ0Wak2WBRrdTR3tCMMTDWkcsA'
-                },
-                body: JSON.stringify({
-                    model: "text-davinci-003", // GPT model
-                    prompt: userInput,
-                    max_tokens: 150
-                })
-            });
+            // Find the response or default to an error message
+            const aiResponse = responses[userInput] || "I'm not sure about that. Try asking about HTML tags, elements, or general knowledge topics!";
+            
+            // Display AI's response
+            chatBox.innerHTML += `<p><strong>AI:</strong> ${aiResponse}</p>`;
 
-            const data = await response.json();
-            const aiReply = data.choices[0].text.trim();
-
-            // Add AI response to the chat box
-            chatBox.innerHTML += `<p><strong>AI:</strong> ${aiReply}</p>`;
-
-            // Clear input
+            // Clear input field
             document.getElementById('user-input').value = '';
 
             // Scroll chat box to the bottom
