@@ -1,0 +1,201 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Page - E-Shikshak</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://c1.wallpaperflare.com/preview/14/432/956/laptop-computer-dark-room.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Transparent background */
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar h1 {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: white;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+        .navbar ul li {
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        .navbar ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Main Header */
+        header {
+            margin-top: 70px; /* To prevent overlap with navbar */
+            text-align: center;
+        }
+        header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            color: white;
+        }
+        header p {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        /* Course Navigation */
+        .lesson-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Lessons */
+        .lesson-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .lesson-list li {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .lesson-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+        }
+        .lesson-list li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .back-btn a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+            .download-btn, .back-btn a {
+                font-size: 16px;
+            }
+            .navbar ul li a {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>E-Shikshak</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Lesson Header -->
+    <header>
+        <h1></h1>
+        
+    </header>
+
+    <!-- Lesson Content -->
+    <div class="lesson-container">
+        <h2>Lesson List</h2>
+        <ul class="lesson-list">
+            <li><a href="Ls1.html">Lesson 1: Introduction to HTML</a></li>
+            <li><a href="ls2.html">Lesson  2: Basic HTML Structure</a></li>
+            <li><a href="lesson3.html">Lesson 3: HTML Elements</a></li>
+            <li><a href="lesson4.html">Lesson 4: Attributes and Properties</a></li>
+            <li><a href="lesson5.html">Lesson 5: Formatting Text in HTML</a></li>
+            <li><a href="lesson6.html">Lesson 6: Creating Links and Images</a></li>
+            <li><a href="lesson7.html">Lesson 7: HTML Lists</a></li>
+        </ul>
+
+        <div class="download-section">
+            <h2></h2>
+<a href="Html and css .pdf" class="download-btn" download>Download Notes</a>
+
+        </div>
+
+        <div class="back-btn">
+            <a href="home.html">← Back to Home</a>
+        </div>
+    </div>
+
+
+</body></html>
