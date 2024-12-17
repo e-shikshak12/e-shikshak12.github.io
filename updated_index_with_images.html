@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>E-Shikshak - Code Your Dream</title>
+  <script src="https://cdn.tailwindcss.com"></script> 
+
+  <!-- PWA Links -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(function (registration) {
+          console.log('Service Worker registered with scope:', registration.scope);
+        }).catch(function (err) {
+          console.error('Service Worker registration failed:', err);
+        });
+    }
+  </script>
+
+  <style>
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Custom animation for text */
+    .fade-in {
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+  <script>
+    // JavaScript to change the image dynamically on page load
+    function changeImage() {
+      var images = [
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVJDeh8HhoCVzJVjBRBMdFMNfaNyLQVBv2BHKssgxp3w&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLD5nnwiIVghAnUvEfMyQegTTpjb9-QuHpMg&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo8VWBhGOGcudUKK6WoWWd2dRMK7FbEIvgag&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3askzyPOfZTaewh2q8dcEuSdSHWvRJLruzA&usqp=CAU'
+      ];
+      var randomImage = images[Math.floor(Math.random() * images.length)];
+      document.getElementById('heroImage').src = randomImage;
+    }
+    window.onload = changeImage;
+  </script>
+</head> 
+<body class="bg-gradient-to-b from-purple-500 via-indigo-600 to-purple-500 text-gray-100"> 
+  <header class="text-white body-font shadow-lg bg-opacity-70 backdrop-blur-sm"> 
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center mb-4 md:mb-0">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBzDQnJKZ2-wdgNPz_6Kx_hff_Q_KI_s3G0w&amp;s" alt="E-Shikshak Logo" class="w-12 h-12 p-2 rounded-full shadow-md">
+        <span class="ml-3 text-3xl font-bold tracking-wide">E-Shikshak</span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-lg justify-center space-x-6">
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">HOME</a>
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">ABOUT</a>
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">COURSES</a>
+        <a href="#" class="hover:text-pink-300 transition duration-300 ease-in-out transform hover:scale-110">QUIZ</a>
+      </nav>
+       <a href=" your-sign-in-url.html"> <button class="inline-flex items-center bg-pink-500 text-white py-2 px-4 rounded hover:bg-pink-600 hover:shadow-lg hover:scale-105 transition-transform duration-300 ml-4 mt-4 md:mt-0">
+        Get Started
+        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </button>
+       </a>
+    </div> 
+  </header> 
+
+  <!-- Hero Section -->
+  <section class="text-white body-font relative"> 
+    <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+      <!-- Gradient Overlay for Hero Section -->
+      <div class="absolute inset-0 bg-gradient-to-r from-purple-800 via-indigo-700 to-purple-800 opacity-75"></div>
+      <!-- Dynamic Hero Image -->
+      <img id="heroImage" class="lg:w-2/5 md:w-3/5 w-full mb-10 object-cover object-center rounded-lg shadow-2xl relative z-10 transform transition duration-500 hover:scale-105" alt="hero">
+      <div class="text-center lg:w-2/3 w-full relative z-10 fade-in">
+        <h1 class="title-font sm:text-6xl text-4xl mb-4 font-extrabold text-white leading-tight">Code Your Dream Into Reality</h1>
+        <p class="mb-8 text-lg leading-relaxed font-light text-white">Unlock your potential with E-Shikshak – the future of learning is here. Choose your path below.</p>
+        <div class="flex justify-center space-x-6">
+          <!-- Guest Button -->
+          <a href="home.html" class="inline-flex text-white bg-indigo-600 border-0 py-3 px-8 focus:outline-none hover:bg-indigo-700 hover:shadow-xl hover:scale-105 transition-transform duration-300 rounded-full text-lg">Guest</a>
+          <!-- Sign In / Sign Up Button -->
+          <a href="your-sign-in-url.html" class="ml-4 inline-flex text-gray-700 bg-gray-200 border-0 py-3 px-8 focus:outline-none hover:bg-gray-300 hover:shadow-xl hover:scale-105 transition-transform duration-300 rounded-full text-lg">Sign In / Sign Up</a>
+        </div>
+      </div>
+    </div> 
+  </section> 
+</body>
+</html>
