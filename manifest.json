@@ -1,0 +1,22 @@
+{
+  "name": "E-Shikshak",
+  "short_name": "E-Shikshak",
+  "description": "Code Your Dream Into Reality - E-Shikshak Learning Platform",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0078D7",
+  "icons": [
+    {
+      "src": "e_shiksha_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "e_shiksha_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
